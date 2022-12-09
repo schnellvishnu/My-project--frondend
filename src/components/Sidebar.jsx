@@ -9,6 +9,8 @@ import {
     FaThList
 }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
+import { BsFillBarChartFill } from "react-icons/bs";
+import {BsFileEarmarkLockFill } from "react-icons/bs";
 
 
 const Sidebar = ({children}) => {
@@ -16,23 +18,24 @@ const Sidebar = ({children}) => {
     const toggle = () => setIsOpen (!isOpen);
     const menuItem=[
         {
-            path:"/",
-            name:"Dashboard",
-            icon:<FaTh/>
-        },
+            path: "/",
+            name: "Home",
+            icon:<FaThList/>
+          },
+          
+          {
+            path: "/account/ReadDataGrid",
+            name: "Account",
+            icon: <BsFileEarmarkLockFill />,
+          },
+          {
+            path: "/dashboard/dashboard",
+            name: "Dashboard",
+            icon:<FaThList/>
+          },
         {
-            path:"/about",
-            name:"About",
-            icon:<FaUserAlt/>
-        },
-        {
-            path:"/analytics",
-            name:"Analytics",
-            icon:<FaRegChartBar/>
-        },
-        {
-            path:"/comment",
-            name:"Comment",
+            path:"/po/podatagrid",
+            name:"Productionorder",
             icon:<FaCommentAlt/>
         },
         {
