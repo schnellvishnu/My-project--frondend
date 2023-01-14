@@ -33,21 +33,38 @@ const Sidebar = ({children}) => {
             name: "Dashboard",
             icon:<FaThList/>
           },
+        
         {
-            path:"/po/podatagrid",
-            name:"Productionorder",
-            icon:<FaCommentAlt/>
-        },
-        {
-            path:"/product",
+            path:"/product/productdatagrid/",
             name:"Product",
             icon:<FaShoppingBag/>
         },
         {
-            path:"/productList",
-            name:"Product List",
+            path:"/stock/stockdatagrid/",
+            name:"Stock",
             icon:<FaThList/>
-        }
+        },
+        {
+            path:"/company/companydatagrid",
+            name:"Company",
+            icon:<FaShoppingBag/>
+        },
+
+        {
+            path:"/customer/customerdatagrid/",
+            name:"Customer",
+            icon:<FaShoppingBag/>
+        },
+        {
+            path:"/shipping/shippingdatagrid/",
+            name:"Shipping Orders",
+            icon:<FaShoppingBag/>
+        },
+        {
+            path:"/history/historydatagrid/",
+            name:"History",
+            icon:<FaShoppingBag/>
+        },
     ]
     return (
         <div className="container">

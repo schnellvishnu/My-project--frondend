@@ -36,15 +36,15 @@ const ReadDataGrid = () => {
     axios
       .delete(`http://localhost:8000/accounts/delete/${id}`,
         {
-         auth: {
-         username: username,
-          password: password
-         }
+        //  auth: {
+        //  username: username,
+        //   password: password
+        //  }
       }
       )
       .then(() => {
         //getData();
-        alert("anu");
+        //alert("anu");
         navigate("/account/ReadDataGrid");
       });
   }
@@ -225,7 +225,12 @@ const ReadDataGrid = () => {
 
   useEffect(() => {
     //console.log('i fire once');
-    getData();
+    if(window.localStorage.getItem('username') && window.localStorage.getItem('password')) {
+      getData();
+       }
+       else{
+        navigate("/");
+       }
     //alert("anu");
   }, []);
 
@@ -245,7 +250,7 @@ const ReadDataGrid = () => {
 
       <Navbar/> 
    
-      <div style={{ height: 700, width: '390%' ,backgroundColor:'#6199c7'}}>
+      <div style={{ height: 700, width: '120%' ,backgroundImage: `url("https://img.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg?size=626&ext=jpg&ga=GA1.1.1508111170.1671688676")`}}>
         <h4>DataGrid</h4>
         <button align='right'
          disabled={ currentUserrole==="staff"|| currentUserrole==="operator" ? true : false}

@@ -10,7 +10,7 @@ const Create = () => {
   const [date_birth, setDob] = useState(new Date());
   const [userRole, setUserRole] = useState("");
   const [address, setAddress] = useState("");
-  // const [pass,setPassword]=useState("");
+  const [pass,setPassword]=useState("");
 
   ///   For navigate function
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const Create = () => {
       setDob(localStorage.getItem("date_birth"));
       setUserRole(localStorage.getItem("userRole"));
       setAddress(localStorage.getItem("address"));
-      // setPassword(localStorage.getItem("pass"));
+      setPassword(localStorage.getItem("pass"));
     }
   }, []);
 
@@ -64,12 +64,12 @@ const Create = () => {
 
     var addressWidget = 
       <textarea onChange={(e) => setAddress(e.target.value)} className="form-control"></textarea>
-    // var passFieldWidget = <input
-    //   type="password"
-    //   className="form-control"
+    var passFieldWidget = <input
+      type="password"
+      className="form-control"
     
-    //   onChange={(e) => setPassword(e.target.value)}
-    // />
+      onChange={(e) => setPassword(e.target.value)}
+    />
       
   }
   else if(operation === 'edit') {
@@ -106,12 +106,13 @@ const Create = () => {
     
     var addressWidget = 
       <textarea value={address} onChange={(e) => setAddress(e.target.value)} className="form-control"></textarea>
-    // var passFieldWidget = <input
-    //   type="password"
-    //   className="form-control"
-    // value={pass}
-    //   onChange={(e) => setPassword(e.target.value)}
-    // />
+    var passFieldWidget = <input
+      type="password"
+      className="form-control"
+    value={pass}
+    
+    onChange={(e) => setPassword(e.target.value)}
+    />
   }
 
   const handleSubmit = (e) => {
@@ -128,7 +129,7 @@ const Create = () => {
           "date_birth" : date_birth,  
           "userRole": userRole,
           "address": address,
-          // "password":pass
+          "password":pass
         },
         {
           auth: {
@@ -152,7 +153,7 @@ const Create = () => {
           "date_birth" : date_birth,  
           "userRole" : userRole,
           "address" : address,
-          // "password":pass
+          "password":pass
         },
         {
           auth: {
@@ -172,7 +173,7 @@ const Create = () => {
     {/* <Navbar data= {window.localStorage.getItem('username') ? window.localStorage.getItem('username') : ""}/> */}
       <div className="d-flex justify-content-between m-2">
         <h2>Create</h2>
-        <Link to="/account/readdatgrid">
+        <Link to="/account/ReadDataGrid">
           <button className="btn btn-primary">Show Data</button>
         </Link>
       </div>
@@ -201,10 +202,10 @@ const Create = () => {
           <label className="form-label">Address</label>
           {addressWidget}
         </div> 
-        {/* <div className="mb-4">
+        <div className="mb-4">
           <label className="form-label">Password</label>
           {passFieldWidget}
-        </div>  */}
+        </div> 
 
         <button
           type="submit"
