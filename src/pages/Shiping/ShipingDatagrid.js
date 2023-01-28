@@ -36,7 +36,6 @@ let userDataColumns=[
 { field: 'createdby', headerName: 'Createdby', width: 160 },
 { field: 'po', headerName: 'Po', width: 160 },
 { field: 'status', headerName: 'Status', width: 160 },
-
 {
               field: 'edit',
                     headerName: 'Edit',
@@ -55,9 +54,9 @@ let userDataColumns=[
                             (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
                           );
                         //alert(thisRow.name);
-                        navigate("/shipping/shippingcreate/edit/"+ thisRow.id)
+                        navigate("/shipping/shippingcreate/edit/"+ thisRow.id+"/"+thisRow.po)
               
-                
+           
                         // setToLocalStorage(
                         //   thisRow.id,
                         //   thisRow.name,
@@ -72,7 +71,7 @@ let userDataColumns=[
                       };
                 
                       //alert(currentUserrole);
-              
+            
               
                       if(currentUserrole == 'admin') {
                         return <button
@@ -87,7 +86,7 @@ let userDataColumns=[
                           onClick={onClick}><i class="fa-solid fa-pen"></i></button>;
                       }
                     },
-                  },
+              },
 
                   {
                     field: 'delete',

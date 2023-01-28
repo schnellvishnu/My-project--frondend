@@ -23,7 +23,7 @@ const Customercreate=()=> {
      //foreginkey vale disply in edit box operation
      const[companynamedisp,setCompanynamedisp]=useState("");
 
-
+//wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
      const navigate = useNavigate();
 //      ////    for receiving the parameters from URL
      const {uniqueID}=useParams();
@@ -31,7 +31,7 @@ const Customercreate=()=> {
 
     
 
- var username = window.localStorage.getItem('username')
+  var username = window.localStorage.getItem('username')
   var password = window.localStorage.getItem('password')
   var currentUserrole = window.localStorage.getItem('userrole')
 
@@ -39,7 +39,7 @@ const Customercreate=()=> {
   
   function selectedCustomerlocation(cuslocfunparam) {
     //alert("anu");
-    axios
+    axios   
       .get("http://127.0.0.1:8000/masterapp/company/",
         {
           auth: {
@@ -182,6 +182,7 @@ const Customercreate=()=> {
      var createdbyfield=<input
      type="text"
      className="form-control form-control-sm"
+     value={username}
      onChange={(e)=>setCreated_by(e.target.value)}
      />
 
@@ -191,7 +192,7 @@ const Customercreate=()=> {
       
       var namefield=<input 
      type="text"
-     value= {name}
+     value={name}
      className="form-control form-control-sm"
      
      onChange={(e)=>setName(e.target.value)}
@@ -257,7 +258,7 @@ const Customercreate=()=> {
         'address':address, 
         'state':state,
         'country':country,
-        "created_by":created_by,
+        "created_by":username,
         'city':city,
         'description':description,  
         'company_name':foreginkeycompanyname,
@@ -285,13 +286,13 @@ const Customercreate=()=> {
       
       
       {
-        "name": name,  
-        'company_name': foreginkeycompanyname,
+        "name":name,  
+        'company_name':foreginkeycompanyname,
         'city':city,
         'state':state,
         'country':country,
         'address':address,
-         'description':description ,    
+        'description':description,    
         "created_by": created_by,
         "loggedInUser":username,
         'userrole':currentUserrole
@@ -328,70 +329,70 @@ const Customercreate=()=> {
       </div>
      
        <table class="table table-borderless productionOrderReportSearchTable" id="productionOrderReportSearchTableID">
-                      <tbody>
-        <tr>
-        <td class="productionOrderReportSearchTD"> Name</td>
-          <td class="productionOrderReportSearchTD">
-          {namefield}
-          </td>
-        </tr>
-        <tr>
-        <td class="productionOrderReportSearchTD"> country</td>
-          <td class="productionOrderReportSearchTD">
-          {countryfield}
-          </td>
-        </tr>
-        <tr>
-        <td class="productionOrderReportSearchTD"> state</td>
-        <td class="productionOrderReportSearchTD">
-          {statefield}
-          </td>
-        </tr>
-        <tr>
-        <td class="productionOrderReportSearchTD"> Address</td>
-                      <td class="productionOrderReportSearchTD">
-          {addressfield}
-          </td>
-        </tr>
-        <tr>
-        <td class="productionOrderReportSearchTD"> city</td>
-                      <td class="productionOrderReportSearchTD">
-          {cityfield}
-          </td>
-        </tr>
-        
-        <tr>
-        <td class="productionOrderReportSearchTD"> Description</td>
-                      <td class="productionOrderReportSearchTD">
-          {desfield}
-          </td>
-        </tr>
-        <tr>
-        <td class="productionOrderReportSearchTD"> company name</td>
-                      <td class="productionOrderReportSearchTD">
-          {companynamefield}
-          </td>
-        </tr>
+          <tbody>
+            <tr>
+              <td class="productionOrderReportSearchTD">Name</td>
+              <td class="productionOrderReportSearchTD">
+                {namefield}
+                </td>
+            </tr>
+            <tr>
+              <td class="productionOrderReportSearchTD">Country</td>
+                <td class="productionOrderReportSearchTD">
+                  {countryfield}
+              </td>
+            </tr>
+            <tr>
+              <td class="productionOrderReportSearchTD"> State</td>
+              <td class="productionOrderReportSearchTD">
+                {statefield}
+              </td>
+            </tr>
+            <tr>
+              <td class="productionOrderReportSearchTD"> Address</td>
+              <td class="productionOrderReportSearchTD">
+                {addressfield}
+              </td>
+            </tr>
+            <tr>
+            <td class="productionOrderReportSearchTD"> City</td>
+              <td class="productionOrderReportSearchTD">
+                {cityfield}
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="productionOrderReportSearchTD"> Description</td>
+                <td class="productionOrderReportSearchTD">
+                  {desfield}
+                </td>
+            </tr>
+            <tr>
+              <td class="productionOrderReportSearchTD"> Company Name</td>
+              <td class="productionOrderReportSearchTD">
+                {companynamefield}
+              </td>
+            </tr>
 
-        <tr>
-        <td class="productionOrderReportSearchTD"> Created By</td>
-                      <td class="productionOrderReportSearchTD">
-          {createdbyfield}
-          </td>
-        </tr>
+            <tr>
+              <td class="productionOrderReportSearchTD">Created By</td>
+              <td class="productionOrderReportSearchTD">
+                {createdbyfield}
+              </td>
+            </tr>
 
-      <tr></tr>
-      <tr>
-      <td class="productionOrderReportSearchTD">
-        <button
-          type="submit"
-          className="btn btn-primary"
-           onClick={handleSubmit}
-        >
-          Submit
-        </button>
-        </td>
-        </tr>
+          <tr></tr>
+          <tr>
+            <td class="productionOrderReportSearchTD">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+              </td>
+            </tr>
       </tbody>
         </table> 
     </> 

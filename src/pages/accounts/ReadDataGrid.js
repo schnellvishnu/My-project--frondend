@@ -36,11 +36,11 @@ const ReadDataGrid = () => {
     axios
       .delete(`http://localhost:8000/accounts/delete/${id}`,
         {
-        //  auth: {
-        //  username: username,
-        //   password: password
-        //  }
-      }
+         auth: {
+         username: username,
+          password: password
+         }
+       }
       )
       .then(() => {
         //getData();

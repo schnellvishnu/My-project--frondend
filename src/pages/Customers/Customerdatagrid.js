@@ -57,7 +57,16 @@ function logout(){
             );
             navigate("/customer/cuscreate/edit/"+ thisRow.id)
         }
-        if(currentUserrole == 'admin'){
+        const api2: GridApi = params.api;
+        const thisRow2: Record<string, GridCellValue> = {};
+
+        api2
+          .getAllColumns()
+          .filter((c) => c.field !== '__check__' && !!c)
+          .forEach(
+            (c) => (thisRow2[c.field] = params.getValue(params.id, c.field)),
+          );
+        if(currentUserrole == 'admin'&& thisRow2.created_by==username){
           return <button
             className="btn btn-primary" 
             onClick={onClick}>Edit</button>;

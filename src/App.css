@@ -78,7 +78,7 @@ border: 2px solid lightgray;
 }
 #productionOrderReportSearchTableID{
     border: 2px solid rgb(17, 15, 15);
-   width: 68%; 
+   width: 100%; 
 }
 /* #loginReportSearchTableID{
     margin-left: 400px;

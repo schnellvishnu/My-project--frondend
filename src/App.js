@@ -19,6 +19,7 @@ import Customerdatagrid from './pages/Customers/Customerdatagrid';
 import Customercreate from './pages/Customers/Customercreate';
 import ProductDatagrid from './pages/Products/ProductDatagrid';
 import ProductCreate from './pages/Products/ProductCreate';
+import Properties from './pages/Products/Properties';
 import StockDatagrid from './pages/Stock/StockDatagrid';
 import ShipingDatagrid from './pages/Shiping/ShipingDatagrid';
 import ShipingCreate from './pages/Shiping/ShipingCreate';
@@ -59,6 +60,7 @@ const App = () => {
 
         <Route path="/product/productdatagrid/" element={<ProductDatagrid />} />
          <Route path="/product/productcreate/:operation/:uniqueID" element={<ProductCreate />} />
+         <Route path="/product/property/:uniqueID" element={<Properties />} />
 
          <Route path="/stock/stockdatagrid/" element={<StockDatagrid />} />
 

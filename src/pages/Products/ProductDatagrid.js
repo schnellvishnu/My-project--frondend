@@ -139,6 +139,49 @@ let userDataColumns=[
                        }
                     },
                   },
+                  {
+                    field: 'properties',
+                   headerName: 'Properties',
+                    sortable: false,
+                    renderCell: (params) => {
+                    const onClick = (e) => {
+                    e.stopPropagation(); // don't select this row after clicking
+                                   
+                    const api: GridApi = params.api;
+                    const thisRow: Record<string, GridCellValue> = {};
+                                   
+                                       api
+                    .getAllColumns()
+                   .filter((c) => c.field !== '__check__' && !!c)
+                   .forEach(
+                    (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
+                                        );
+                   navigate("/product/property/"+ thisRow.id)
+                       }
+
+                       const api2: GridApi = params.api;
+       const thisRow2: Record<string, GridCellValue> = {};
+
+       api2
+         .getAllColumns()
+         .filter((c) => c.field !== '__check__' && !!c)
+         .forEach(
+           (c) => (thisRow2[c.field] = params.getValue(params.id, c.field)),
+         );
+
+                   if(currentUserrole == 'admin' ){
+                    return <button
+                   className="btn btn-primary" 
+                   onClick={onClick}>Properties</button>;
+                   }
+                    else{
+                    return <button
+                   className="btn btn-primary"
+                   disabled="true"
+                    onClick={onClick}>Properties</button>;
+                    }
+                    }
+                    },
 
                   {
 

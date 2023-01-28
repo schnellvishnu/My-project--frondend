@@ -251,7 +251,7 @@ const Shipingrcreate=()=> {
   }
 
   else if(operation === 'edit') {
-    // alert( name) 
+    alert( uniqueID) 
     axios
       .put(`http://localhost:8000/masterapp/shippo/update/${shipEditId}`,
       
@@ -268,7 +268,8 @@ const Shipingrcreate=()=> {
         // 'status':status,
         "loggedInUser":username,
         'userrole':currentUserrole,
-        'po':ponumber
+        // 'po':ponumber
+        "ponumber":uniqueID,
         
       },
       {
