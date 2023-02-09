@@ -18,6 +18,9 @@ function ProductCreate() {
  const[created_at,setCreatedat]=useState("");
  const[updated_at,setUpdatedat]=useState("");
  const[status,setStatus]=useState(""); 
+ const[company_name,setCompanyName]=useState("");
+const[customer_name,setCustomerName]=useState("");
+
  
  const navigate=useNavigate()
 
@@ -27,6 +30,9 @@ function ProductCreate() {
 var username = window.localStorage.getItem('username')
 var password = window.localStorage.getItem('password')
 var currentUserrole = window.localStorage.getItem('userrole')
+
+let companynameOption=[]
+let customernameOption=[]
 
 
 function getProductEditData(){
@@ -52,19 +58,89 @@ function getProductEditData(){
      setCreatedBy(res.data[0].created_by)
      setCreatedat(res.data[0].created_at)
      setUpdatedat(res.data[0].updated_at)
-     setStatus(res.data[0].status) 
+     setStatus(res.data[0].status)
+     setCompanyName(res.data[0].company_name)
+     setCustomerName(res.data[0].customer_name) 
      
      
   })
 
 
 }
+
+
+
+
+function getComanyforeginkeyData(){
+  axios
+  .get("http://127.0.0.1:8000/masterapp/company/",
+
+  {
+    auth: {
+      username: username,
+      password: password
+   }
+  },
+  {
+    'param': 'vbc' 
+  }
+  )
+  .then((res)=>{
+  res.data.map(data=>{
+                  // alert("anu")
+      if(data.status==true){
+            companynameOption.push({value:data.id,label:data.name})
+              }
+  });
+  setCompanyName(companynameOption);
+})
+}
+
+function getCustomerForeginkeyData(){
+  axios
+    .get("http://127.0.0.1:8000/masterapp/customer/",
+
+    {
+      auth: {
+        username: username,
+        password: password
+     }
+    },
+    {
+      'param': 'vbc' 
+    }
+    )
+    .then((res)=>{
+    res.data.map(data=>{
+      if(data.status==true){
+                    // alert("anu")
+              customernameOption.push({value:data.id,label:data.name})
+      }
+    });
+    setCustomerName(customernameOption);
+  })
+}
+
 useEffect(()=>{
+  getComanyforeginkeyData();
+  getCustomerForeginkeyData();
   if(operation =="edit"){
      getProductEditData()               
   }                  
 },[]);
 
+
+const getCompanynameOptions=event=>{
+  // alert(event.value)
+  setCompanyName(event.value);
+}
+
+const getCustomerNameOptions=event=>{
+  // alert(event.value)
+ setCustomerName(event.value);
+
+
+  }
 
 function getSapProductData(){
                   // alert(ponumber) 
@@ -116,6 +192,8 @@ if(operation =="new"){
   onChange={(e)=>setName(e.target.value)}
   value={name}
   />
+  var companynamefield=
+  <Select options={company_name} onChange={getCompanynameOptions}></Select>
 
   var descriptionfield=<input
  type="text"
@@ -123,6 +201,8 @@ if(operation =="new"){
   onChange={(e)=>setDescription(e.target.value)}
   value={description}
   />
+  var customernamefield=
+  <Select options={customer_name} onChange={getCustomerNameOptions}></Select>
 
   var createdbyfield=<input
  type="text"
@@ -169,7 +249,8 @@ else if(operation =="edit"){
   onChange={(e)=>setName(e.target.value)}
   value={name}
   />
-
+  var companynamefield=
+  <Select options={company_name} onChange={getCompanynameOptions}></Select>
   var descriptionfield=<input
  type="text"
  className="form-control form-control-sm"
@@ -191,6 +272,8 @@ else if(operation =="edit"){
   value={created_at}
 
   />
+  var customernamefield=
+  <Select options={customer_name} onChange={getCustomerNameOptions}></Select>
 
   var updatedatfield=<input
  type="text"
@@ -233,6 +316,8 @@ if(operation =="new"){
   "created_at":created_at,
   "updated_at":updated_at,
   "status" :status,
+  "customer_name":customer_name,
+  "company_name":company_name,
   "loggedInUser":username,
   'userrole':currentUserrole                   
  },
@@ -260,6 +345,8 @@ else if(operation =="edit"){
                     "created_at":created_at,
                     "updated_at":updated_at,
                     "status" :status,
+                    "customer_name":customer_name,
+                    "company_name":company_name,
                     "loggedInUser":username,
                     'userrole':currentUserrole                   
    },
@@ -314,7 +401,13 @@ else if(operation =="edit"){
      </td>
 
      </tr> 
+     <tr>
+     <td class="productionOrderReportSearchTD"> Company Name</td>
+     <td class="productionOrderReportSearchTD">
+       {companynamefield}             
+     </td>
 
+     </tr> 
      <tr>
      <td class="productionOrderReportSearchTD"> Created By</td>
      <td class="productionOrderReportSearchTD">
@@ -327,6 +420,13 @@ else if(operation =="edit"){
      <td class="productionOrderReportSearchTD"> Created At</td>
      <td class="productionOrderReportSearchTD">
        {createdatfield}             
+     </td>
+
+     </tr> 
+     <tr>
+     <td class="productionOrderReportSearchTD"> Customer Name</td>
+     <td class="productionOrderReportSearchTD">
+       {customernamefield}             
      </td>
 
      </tr> 

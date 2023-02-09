@@ -203,6 +203,8 @@ function getData(){
   })
 }
 
+
+
 const navigateToCreatePage = () => {
   navigate("/shipping/shippingcreate/new/new");
 };

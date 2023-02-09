@@ -37,9 +37,10 @@ let userDataColumns=[
                    
                     { field: 'name', headerName: 'name', width: 100 },
                     { field: 'description', headerName: 'description', width: 150 },
-                
+                    { field: 'customer_name', headerName: 'Customer Name', width: 150 },
                     { field: 'created_by', headerName: 'created_by', width: 150 },
-                    { field: 'created_at', headerName: 'Created At', width: 170 },  
+                    { field: 'created_at', headerName: 'Created At', width: 170 },
+                    { field: 'company_name', headerName: 'Company Name', width: 150 },  
                     { field: 'updated_at', headerName: 'updated_at ', width: 170 },    
                     { field: 'status', headerName: 'status', width: 170 },
 
@@ -286,23 +287,60 @@ let userDataColumns=[
                                       
 
 ]
+// function createRows(rowDatas){
+//   let editButton = <button></button>;
+//   rowDatas.map (rowData =>{
+//     setUserDataRows(userDataRows =>[
+//       ...userDataRows,
+//       {'id':rowData.id,'ponumber':rowData.ponumber,'name':rowData.name,'description':rowData.description,'created_by':rowData.created_by,'created_at':rowData.created_at,"updated_at":rowData.updated_at,"customer_name":rowData.customer_name,"company_name":rowData.company_name,"status":rowData.status}
+//     ])
+//   })  
+// }
 
 function createRows(rowDatas){
-  //  let editButton = <button></button>; 
-     rowDatas.map(rowData =>{
-       setUserDataRows(userDataRows =>[
-...userDataRows,
-     {"id":rowData.id,"ponumber":rowData.ponumber,"name":rowData.name,"description":rowData.description,
-    "created_by":rowData.created_by,"created_at":rowData.created_at,"updated_at":rowData.updated_at,"status":rowData.status}      
+  let editButton = <button></button>;
+  rowDatas.map (rowData =>{
+    // alert("anu")
+    axios
+    .get("http://127.0.0.1:8000/masterapp/company/"+rowData.company_name,
+      {
+        auth: {
+          username: username,
+          password: password
+        }
+      },
+      {
+        'param': 'anu' 
+      }
+    )
+     .then((res) => {
 
-       ])             
-     })               
+
+      axios
+      .get("http://127.0.0.1:8000/masterapp/customer/"+rowData.customer_name,
+        {
+          auth: {
+            username: username,
+            password: password
+          }
+        },
+        {
+          'param': 'anu' 
+        }
+      )
+      .then((res2) => {
+    setUserDataRows(userDataRows =>[
+      ...userDataRows,
+      {'id':rowData.id,'ponumber':rowData.ponumber,'name':rowData.name,'description':rowData.description,'created_by':rowData.created_by,'created_at':rowData.created_at,"updated_at":rowData.updated_at,'company_name':res.data[0].name,'customer_name':res2.data[0].name,"status":rowData.status}
+    ])
+  })
+})
+})  
 }
-
 function getData(){
       
   axios
-  .get(`http://127.0.0.1:8000/masterapp/products/`,
+  .get("http://127.0.0.1:8000/masterapp/products/",
   {
     auth: {
       username: username,

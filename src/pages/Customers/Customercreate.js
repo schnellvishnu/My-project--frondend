@@ -17,6 +17,7 @@ const Customercreate=()=> {
      const[country,setCountry]=useState("") ;
      const[state,setState]  =useState("") ;
      const[city,setCity]  =useState("");
+     const[status,setStatus]=useState("");
     //  const[company_name,setCompanyName] =useState("");
      const[foreginkeycompanyname,setForeginCompany]=useState("");
 
@@ -95,6 +96,7 @@ const Customercreate=()=> {
            setState(res.data[0].state)
            setCreated_by(res.data[0].created_by)
            setDescription(res.data[0].description)
+           setStatus(res.data[0].status)
 
        })           
   }
@@ -262,6 +264,7 @@ const Customercreate=()=> {
         'city':city,
         'description':description,  
         'company_name':foreginkeycompanyname,
+        'status':status,
         "loggedInUser":username,
         'userrole':currentUserrole  
       
@@ -294,6 +297,7 @@ const Customercreate=()=> {
         'address':address,
         'description':description,    
         "created_by": created_by,
+        'status':status,
         "loggedInUser":username,
         'userrole':currentUserrole
 
@@ -382,6 +386,12 @@ const Customercreate=()=> {
             </tr>
 
           <tr></tr>
+          <tr>
+                  <td class="productionOrderReportSearchTD">Status</td>
+                  <td class="productionOrderReportSearchTD">
+                  <input type="checkbox" checked={status} onChange={e => setStatus(e.target.checked)}/>
+                  </td>
+                  </tr>
           <tr>
             <td class="productionOrderReportSearchTD">
               <button

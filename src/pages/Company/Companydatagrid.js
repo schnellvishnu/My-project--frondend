@@ -64,6 +64,7 @@ const Companydatagrid=() =>{
 
     { field: 'country', headerName: 'Country', width: 150 },
     { field: 'created_at', headerName: 'Created At', width: 170 },
+    { field: 'status', headerName: 'Status', width: 170 },
     {
       field: 'edit',
       headerName: 'Edit',
@@ -94,6 +95,40 @@ const Companydatagrid=() =>{
           disabled="true"
           onClick={onClick}>Edit</button>;
         }
+
+        const api2: GridApi = params.api;
+
+    const thisRow2: Record<string, GridCellValue> = {};
+
+
+
+    api2
+
+      .getAllColumns()
+
+      .filter((c) => c.field !== '__check__' && !!c)
+
+      .forEach(
+
+        (c) => (thisRow2[c.field] = params.getValue(params.id, c.field)),
+
+      );
+
+  //alert(currentUserrole);
+
+
+
+   
+
+  if( thisRow2.status=='True') {
+
+    return("Confirmed");
+  
+
+    }
+    else
+      
+    return("Not Confirmed");
       }
     },
     //http://127.0.0.1:8000/masterapp/company/delete/${thisRow.id}
@@ -174,9 +209,17 @@ const Companydatagrid=() =>{
       function createRows(rowDatas){
         let editButton = <button></button>;
         rowDatas.map (rowData =>{
+          if(rowData.status==true){
+            rowData.status="Confirmed"
+          }
+          else{
+            rowData.status="Not Confirmed"
+          }
           setUserDataRows(userDataRows =>[
+            
             ...userDataRows,
-            {'id':rowData.id,'name':rowData.name,'zip':rowData.zip,'state':rowData.state,'country':rowData.country,'created_at':rowData.created_at}
+            
+            {'id':rowData.id,'name':rowData.name,'zip':rowData.zip,'state':rowData.state,'country':rowData.country,'created_at':rowData.created_at,'status':rowData.status}
           ])
         })  
       }
@@ -195,6 +238,7 @@ const Companydatagrid=() =>{
         }
         )
         .then((res)=>{
+         
           setData(res.data)
           createRows(res.data)
         })

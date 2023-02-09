@@ -14,6 +14,7 @@ const Companycreate=() =>{
  const[state,setState]=useState("");
  const[country,setCountry]=useState("");
  const[created_at,setCreated_at]=useState("");
+ const[status,setStatus]=useState("")
  
  
  const navigate = useNavigate();
@@ -48,6 +49,7 @@ function getCompanyEditData(){
                     setCountry(res.data[0].country);
                     setState(res.data[0].state);
                     setCreated_at(res.data[0].created_at);
+                    setStatus(res.data[0].status)
                   })}
 
 
@@ -153,6 +155,7 @@ function getCompanyEditData(){
       "state":state,
       "country":country,
       "created_at":created_at,
+      "status":status,
       "loggedInUser":username,
       'userrole':currentUserrole 
     },
@@ -181,6 +184,7 @@ function getCompanyEditData(){
                     "state":state,
                     "country":country,
                     "created_at":created_at,
+                    "status":status,
                     "loggedInUser":username,
                     'userrole':currentUserrole  
 
@@ -250,7 +254,12 @@ function getCompanyEditData(){
                      <td className="company">
                     {createdatfield}</td>                   
                     </tr> 
-
+                    <tr>
+                      <td class="productionOrderReportSearchTD">Status</td>
+                      <td class="productionOrderReportSearchTD">
+                      <input type="checkbox" checked={status} onChange={e => setStatus(e.target.checked)}/>
+                      </td>
+                      </tr>
                     <tr>
                       <td>
                      </td>

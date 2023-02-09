@@ -38,6 +38,7 @@ function logout(){
     { field: 'description', headerName: 'Description', width: 170 },
     { field: 'address', headerName: 'Address', width: 170 },
     { field: 'company_name', headerName: 'Company name', width: 170 },
+    { field: 'status', headerName: 'Status', width: 170 },
     {
       field: 'edit',
       headerName: 'Edit',
@@ -77,8 +78,30 @@ function logout(){
           disabled="true"
           onClick={onClick}>Edit</button>;
         }
+        const api3: GridApi = params.api;
+        const thisRow3: Record<string, GridCellValue> = {};
+
+        api3
+          .getAllColumns()
+          .filter((c) => c.field !== '__check__' && !!c)
+          .forEach(
+            (c) => (thisRow3[c.field] = params.getValue(params.id, c.field)),
+          );
+          
+  if( thisRow3.status=='True') {
+
+    return("Confirmed");
+  
+
+    }
+    else
+      
+    return("Not Confirmed");
       }
     },
+      
+
+    
 
         {
           field: 'delete',
@@ -136,6 +159,7 @@ function logout(){
       function createRows(rowDatas){
         let editButton = <button></button>;
         rowDatas.map (rowData =>{
+          
           axios
           .get("http://127.0.0.1:8000/masterapp/company/"+rowData.company_name,
             {
@@ -149,10 +173,16 @@ function logout(){
             }
           )
           .then((res) => {
+            if(rowData.status==true){
+              rowData.status="Confirmed"
+            }
+            else{
+              rowData.status="Not Confirmed"
+            }
           setUserDataRows(userDataRows =>[
             ...userDataRows,
             {'id':rowData.id,'name':rowData.name,'city':rowData.city,'state':rowData.state,'country':rowData.country,'created_by':rowData.created_by,'description':rowData.description,'address':rowData.address,
-            'company_name':res.data[0].name}
+            'company_name':res.data[0].name,"status":rowData.status}
           ])
         })
       })
@@ -207,7 +237,7 @@ function logout(){
     <Navbar/> 
    
    
-      <div style={{ height: 700, width: '390%',backgroundImage: `url("https://img.freepik.com/free-vector/realistic-white-monochrome-background_23-2149023988.jpg?size=626&ext=jpg&ga=GA1.2.1508111170.1671688676&semt=ais")` }}>
+      <div style={{ height: 700, width: '240%',backgroundImage: `url("https://img.freepik.com/free-vector/realistic-white-monochrome-background_23-2149023988.jpg?size=626&ext=jpg&ga=GA1.2.1508111170.1671688676&semt=ais")` }}>
         <h5>CUSTOMERS</h5>
         <button align='right'
         disabled={currentUserrole==="operator" || currentUserrole==="staff" ? true : false}
